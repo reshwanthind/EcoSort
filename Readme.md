@@ -148,7 +148,6 @@ python model.py
 
 The project automatically generates:
 
-- Accuracy vs Epochs
 - Loss vs Epochs
 - Confusion Matrix
 - Classification Report
