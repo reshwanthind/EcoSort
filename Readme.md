@@ -1,4 +1,4 @@
-# ♻️ Garbage Classification using Convolutional Neural Networks (CNN)
+# ♻️ EcoSort : Garbage Classification using Convolutional Neural Networks (CNN)
 
 A deep learning-based image classification system that categorizes waste into six classes: cardboard, glass, metal, paper, plastic, and trash. The project demonstrates an end-to-end CNN pipeline with data augmentation, GPU memory optimization, early stopping, model checkpointing, and detailed evaluation using a confusion matrix and classification report.
 
