@@ -1,6 +1,6 @@
-# ♻️ EcoSort : Garbage Classification using Convolutional Neural Networks (CNN)
+# ♻️ Garbage Classification using Convolutional Neural Networks (CNN)
 
-A deep learning-based image classification system that categorizes waste into six classes: cardboard, glass, metal, paper, plastic, and trash. The project focuses on building an efficient CNN pipeline with strong generalization using data augmentation and GPU optimization.
+A deep learning-based image classification system that categorizes waste into six classes: cardboard, glass, metal, paper, plastic, and trash. The project demonstrates an end-to-end CNN pipeline with data augmentation, GPU memory optimization, early stopping, model checkpointing, and detailed evaluation using a confusion matrix and classification report.
 
 ---
 
@@ -9,7 +9,7 @@ A deep learning-based image classification system that categorizes waste into si
 - Develop an automated system for accurate garbage classification
 - Reduce human effort and error in waste segregation
 - Improve efficiency of recycling and waste management systems
-- Leverage deep learning (CNNs) for real-world environmental impact
+- Apply CNNs to a practical environmental problem
 
 ---
 
@@ -17,9 +17,8 @@ A deep learning-based image classification system that categorizes waste into si
 
 - 🧠 Custom CNN architecture for multi-class classification
 - 🔄 Data augmentation for better generalization
-- 📉 Adaptive learning rate scheduling (ReduceLROnPlateau)
-- 📊 Training visualization (accuracy & loss curves)
-- 💾 Model saving for inference and deployment
+- ⚡ GPU memory growth enabled for stable training
+- 📉 Adaptive learning rate scheduling with `ReduceLROnPlateau`
 
 ---
 
@@ -29,7 +28,7 @@ Dataset source: https://www.kaggle.com/datasets/asdasdasasdas/garbage-classifica
 
 ### Structure
 
-```
+```text
 dataset/
 └── Garbage classification/
     ├── cardboard/
@@ -41,19 +40,19 @@ dataset/
 ```
 
 - Images are organized class-wise
-- Automatically split into 80% training and 20% validation
+- Training/validation split is created automatically using `validation_split=0.2`
 
 ---
 
 ## 🏗️ Model Architecture
 
-- Input: 224×224 RGB images
-- Convolutional Blocks:
-  - Conv2D → MaxPooling → BatchNormalization
-- Fully Connected Layers:
-  - Dense(256) → Dropout(0.5) → Dense(128)
-- Output Layer:
-  - Softmax (6 classes)
+- Input: `224×224` RGB images
+- 4 Convolutional blocks:
+  - `Conv2D → MaxPooling2D → BatchNormalization`
+- Fully connected layers:
+  - `Dense(256) → Dropout(0.5) → Dense(128)`
+- Output layer:
+  - `Dense(6, activation='softmax')`
 
 ---
 
@@ -63,32 +62,50 @@ dataset/
 - TensorFlow / Keras
 - NumPy
 - Matplotlib
+- Seaborn
+- scikit-learn
 
 ---
 
 ## 🧪 Training Configuration
 
-| Parameter  | Value                    |
-| ---------- | ------------------------ |
-| Image Size | 224 × 224                |
-| Batch Size | 16                       |
-| Epochs     | 50                       |
-| Optimizer  | Adam                     |
-| Loss       | Categorical Crossentropy |
+| Parameter | Value |
+|---|---:|
+| Image Size | 224 × 224 |
+| Batch Size | 16 |
+| Epochs | 50 |
+| Optimizer | Adam |
+| Loss Function | Categorical Crossentropy |
+| Validation Split | 20% |
 
 ---
 
 ## 📈 Results
 
-- Achieved **~85% validation accuracy** on the garbage classification dataset
-- Stable convergence with data augmentation
-- Reduced overfitting using dropout and batch normalization
-- Improved validation performance via dynamic learning rate scheduling
+### Model Performance
 
-### Output Artifacts
+- **Validation accuracy:** approximately **75%**
+- **Weighted F1-score:** **0.75**
+- **Macro F1-score:** **0.72**
+- Best class performance was observed for **paper** with recall of **0.94**
+- Hardest class to classify was **trash**, with lower precision and recall than the other categories
 
-- `results/garbage_model_high_acc.h5` → Trained model
-- `results/training_metrics.png` → Accuracy & loss curves
+### Classification Report Summary
+
+- cardboard: precision 0.90, recall 0.68, F1-score 0.77
+- glass: precision 0.80, recall 0.78, F1-score 0.79
+- metal: precision 0.73, recall 0.70, F1-score 0.71
+- paper: precision 0.74, recall 0.94, F1-score 0.83
+- plastic: precision 0.70, recall 0.66, F1-score 0.68
+- trash: precision 0.52, recall 0.56, F1-score 0.54
+
+### Generated Evaluation Outputs
+
+- `results/training_metrics.png` → training and validation accuracy/loss curves
+- `results/confusion_matrix.png` → confusion matrix heatmap
+- `results/classification_report.txt` → precision / recall / F1 report
+- `results/best_model.keras` → best checkpoint during training
+- `results/garbage_model_high_acc.h5` → final saved model
 
 ---
 
@@ -97,8 +114,8 @@ dataset/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/reshwanthind/garbage-classification-cnn.git
-cd garbage-classification-cnn
+git clone https://github.com/reshwanthind/EcoSort.git
+cd EcoSort
 ```
 
 ### 2. Install dependencies
@@ -107,17 +124,17 @@ cd garbage-classification-cnn
 pip install -r requirements.txt
 ```
 
-### 3. Download Dataset
+### 3. Download the Dataset
 
-- Go to the dataset link: https://www.kaggle.com/datasets/asdasdasasdas/garbage-classification
+- Go to the Kaggle dataset page: https://www.kaggle.com/datasets/asdasdasasdas/garbage-classification
 - Download and extract it
-- Place it inside the project as:
+- Place the extracted folder inside the project as:
 
-```
+```text
 dataset/Garbage classification/
 ```
 
-⚠️ Note: The dataset is ignored via `.gitignore`
+> Note: `dataset/` is excluded from Git using `.gitignore`.
 
 ### 4. Run Training
 
@@ -127,18 +144,29 @@ python model.py
 
 ---
 
-## 📊 Visualization
+## 📊 Visualizations
 
-Training generates:
+The project automatically generates:
 
 - Accuracy vs Epochs
 - Loss vs Epochs
+- Confusion Matrix
+- Classification Report
 
-Graphs are saved automatically in the `results/` directory.
+All outputs are saved inside the `results/` directory.
 
 ---
 
+## 📌 Future Improvements
+
+- Transfer learning with models like ResNet, EfficientNet, or MobileNet
+- Hyperparameter tuning to improve validation accuracy
+- Deployment as a web app using Flask, FastAPI, or Streamlit
+- Mobile or edge-device inference optimization
+
+---
 
 ## 📝 License
 
 This project is licensed under the MIT License.
+
