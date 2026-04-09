@@ -148,7 +148,7 @@ python model.py
 
 The project automatically generates:
 
-- Loss vs Epochs
+- Best Model Parameters
 - Confusion Matrix
 - Classification Report
 
